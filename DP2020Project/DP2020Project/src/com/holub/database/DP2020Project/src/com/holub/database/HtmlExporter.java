@@ -81,7 +81,6 @@ public class HtmlExporter implements Table.Exporter
 
 	            width =width- 1;
 	        }
-		//storeRow( columnNames ); // 쉼표로 구분되어 있는 컬럼 id들의 리스트
 		out.write("</tr>\n");
 	}
 
