@@ -806,12 +806,14 @@ import com.holub.tools.ArrayIterator;
 		public void testStore() throws IOException, ClassNotFoundException { // Flush the table to disk, then reread it.
 																				// Subsequent tests that use the
 																				// "people" table will
-																				// fail if this operation fails.
+			                        										// fail if this operation fails.
 
+						
 			Writer out = new FileWriter("people");
 			people.export(new CSVExporter(out));
 			out.close();
-
+			
+			
 			Reader in = new FileReader("people");
 			people = new ConcreteTable(new CSVImporter(in));
 			in.close();
