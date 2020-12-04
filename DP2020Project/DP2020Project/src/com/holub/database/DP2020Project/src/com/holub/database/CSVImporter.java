@@ -76,8 +76,9 @@ public class CSVImporter implements Table.Importer
 	                    ;
 	}
 	public void startTable()			throws IOException
-	{	tableName   = in.readLine().trim();
-		columnNames = in.readLine().split("\\s*,\\s*");
+	{		tableName   = in.readLine().trim();
+	columnNames = in.readLine().split("\\s*,\\s*");
+
 	}
 	public String loadTableName()		throws IOException
 	{	return tableName;
@@ -102,4 +103,6 @@ public class CSVImporter implements Table.Importer
 	}
 
 	public void endTable() throws IOException {}
+	
+	
 }
