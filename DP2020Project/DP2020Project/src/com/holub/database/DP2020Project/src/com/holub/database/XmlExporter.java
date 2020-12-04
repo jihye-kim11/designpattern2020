@@ -99,8 +99,9 @@ public class XmlExporter implements Table.Exporter
 			people.insert( new String[]{ "Rip",		"VanWinkle" } );
 			people.insert( new String[]{ "Goldie",	"Locks" 	} );
 
-			
-			 Writer writer = new FileWriter("C:\\dp2020/people.xml");
+			Writer writer = new FileWriter("C:\\Users\\samsung\\Documents\\GitHub\\designpattern2020\\DP2020Project/people.xml");
+		
+			// Writer writer = new FileWriter("C:\\dp2020/people.xml");
 			 people.export(new XmlExporter(writer));
 	            writer.close();
 
