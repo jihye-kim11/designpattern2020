@@ -115,16 +115,11 @@ public class HtmlExporter implements Table.Exporter
 			people.insert( new String[]{ "Rip",		"VanWinkle" } );
 			people.insert( new String[]{ "Goldie",	"Locks" 	} );
 
-			javax.swing.JFrame frame = new javax.swing.JFrame();
-			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+			
+			 Writer writer = new FileWriter("C:\\Users\\samsung\\Documents\\GitHub\\designpattern2020\\DP2020Project/people.html");
+			 people.export(new HtmlExporter(writer));
+	            writer.close();
 
-			JTableExporter tableBuilder = new JTableExporter();
-			people.export( tableBuilder );
-
-			frame.getContentPane().add(
-					new JScrollPane( tableBuilder.getJTable() ) );
-			frame.pack();
-			frame.setVisible( true );
 		}
 	}
 }
