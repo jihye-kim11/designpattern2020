@@ -30,8 +30,6 @@ import com.holub.database.Table;
 
 import java.io.*;
 import java.util.*;
-import java.io.Writer;
-import java.io.IOException;
 import java.util.Iterator;
 
 import javax.swing.JFrame;
@@ -72,24 +70,23 @@ public class XmlExporter implements Table.Exporter
 	}
 
 	public void storeRow( Iterator data ) throws IOException
-	{	int i = width;
-	 out.write("<tr>\n");
+	{	int i =0;
+	 out.write("<row>\n");
 		while( data.hasNext() )
 		{	Object datum = data.next();
-		 out.write("<td>");
 			if( datum != null )	{
-				out.write( datum.toString() );}
+				out.write("<"+ columnNames[i]+">" );
+				out.write( datum.toString() );
+				out.write("</"+ columnNames[i]+">" +"\n" );}
+			if(i<width) {i++;}
 
-			out.write("</td>\n");
-			
-			i=i-1;
 		}
-		out.write("</tr>\n");
+		out.write("</row>\n");
 	}
 
 	public void endTable() throws IOException {
-		 out.write("</table>\n");
-        out.write("</body>\n");
+	     out.write(tableName == null ? "</anonymous>" : "</" + tableName + ">");
+	     out.write("\n");
 	}
 	
 	public static class Test
@@ -102,16 +99,11 @@ public class XmlExporter implements Table.Exporter
 			people.insert( new String[]{ "Rip",		"VanWinkle" } );
 			people.insert( new String[]{ "Goldie",	"Locks" 	} );
 
-			javax.swing.JFrame frame = new javax.swing.JFrame();
-			frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+			
+			 Writer writer = new FileWriter("C:\\Users\\samsung\\Documents\\GitHub\\designpattern2020\\DP2020Project/people.xml");
+			 people.export(new XmlExporter(writer));
+	            writer.close();
 
-			JTableExporter tableBuilder = new JTableExporter();
-			people.export( tableBuilder );
-
-			frame.getContentPane().add(
-					new JScrollPane( tableBuilder.getJTable() ) );
-			frame.pack();
-			frame.setVisible( true );
 		}
 	}
 }
