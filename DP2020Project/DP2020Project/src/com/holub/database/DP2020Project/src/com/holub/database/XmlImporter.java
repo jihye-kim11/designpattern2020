@@ -28,6 +28,8 @@ package com.holub.database;
 
 import com.holub.tools.ArrayIterator;
 
+//import snippet.Visitor;
+
 import java.io.*;
 import java.util.*;
 
@@ -131,7 +133,12 @@ public class XmlImporter implements Table.Importer
 	}
 
 	public void endTable() throws IOException {}
-	
+	//추가
+
+	 public void accept(Visitor v)
+	    {
+	        v.visit(this);            //어느 visit() 메서드를 호출할지 결정납니다.
+	    }
 public static class Test{
 	public static void main( String[] args ) throws IOException
 	{	
@@ -145,7 +152,11 @@ public static class Test{
             System.out.println(people.toString());
         }
         else {System.out.println("파일이 없습니다.");}
+        XmlImporter importer = new XmlImporter(in);
+        importer.accept(new ViewVisitor()); 
+   
     
 	}
 	}
 }
+
