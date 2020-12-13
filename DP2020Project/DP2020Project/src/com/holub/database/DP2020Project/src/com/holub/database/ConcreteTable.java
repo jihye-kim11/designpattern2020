@@ -406,7 +406,6 @@ import com.holub.tools.ArrayIterator;
 	// ----------------------------------------------------------------------
 	public Table select(Selector where) {
 		Table resultTable = new ConcreteTable(null, (String[]) columnNames.clone());
-
 		Results currentRow = (Results) rows();
 		Cursor[] envelope = new Cursor[] { currentRow };
 
@@ -421,7 +420,6 @@ import com.holub.tools.ArrayIterator;
 	public Table select(Selector where, String[] requestedColumns) {
 		if (requestedColumns == null)
 			return select(where);
-
 		Table resultTable = new ConcreteTable(null, (String[]) requestedColumns.clone());
 
 		Results currentRow = (Results) rows();
@@ -558,17 +556,17 @@ import com.holub.tools.ArrayIterator;
 
 		if (requestedColumns != null) // SELECT *
 		{
-			// Can't cast an Object[] to a String[], so make a copy to ensure
-			// type safety.
-
+			// Object[] 를 String[]으로 캐스팅할 수 없으므로 값을 복사하여
+			// 타입 안정성을 보장한다.
 			columnNames = new String[requestedColumns.size()];
 			int i = 0;
 			Iterator column = requestedColumns.iterator();
-
 			while (column.hasNext())
 				columnNames[i++] = column.next().toString();
 		}
-
+		else { // SELECT * 부분 수정
+			columnNames = this.columnNames.clone();
+		}
 		if (other != null)
 			otherTables = (Table[]) other.toArray(new Table[other.size()]);
 
@@ -720,7 +718,6 @@ import com.holub.tools.ArrayIterator;
 
 			System.out.println(people.toString());
 			System.out.println(address.toString());
-
 //			try {
 //				people.insert(new Object[] { "x" });
 //				throw new AssertionError("insert wrong number of fields test failed");
@@ -821,7 +818,7 @@ import com.holub.tools.ArrayIterator;
 
 		public void testJoin() {
 			// First test a two-way join
-
+			System.out.println("확인2.\n");
 			System.out.println("\nSELECT first,last,street,city,state,zip" + " FROM people, address"
 					+ " WHERE people.addrId = address.addrId");
 

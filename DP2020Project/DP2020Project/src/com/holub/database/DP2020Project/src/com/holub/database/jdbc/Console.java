@@ -220,6 +220,10 @@ public class Console
 		return b.toString();
 	}
 	//----------------------------------------------------------------------
+	//c:/dp2020
+	//select street from address, name where address.addrId = name.addrId
+	//select * from address, name where address.addrId = name.addrId
+
 	private void openDatabase()
 	{	
 		String databaseName;
@@ -228,10 +232,10 @@ public class Console
 			databaseName = JOptionPane.showInputDialog(
 					  "Enter database directory (e.g. c:/tmp/foo)\n"
 					+ "Directory must exist." );
-
+			//System.out.println("»Æ¿Œ1.\n");
 			if( databaseName == null )
 				System.exit(1);
-
+			//File database = new File("C:\\Users\\samsung\\Documents\\GitHub\\designpattern2020\\DP2020Project","address.xml");
 			File database = new File( databaseName );
 			if( database.exists() && database.isDirectory() )
 				break;
